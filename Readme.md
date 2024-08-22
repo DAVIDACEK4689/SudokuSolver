@@ -1,4 +1,4 @@
-# Dokumentace k zápočtovému programu z programování I
+# Dokumentace k zápočtovému programu z programování
 
 **Autor:** Tadeáš Tomiška
 
