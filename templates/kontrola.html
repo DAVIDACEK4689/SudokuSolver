@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="tadeas tomiska">
+    <meta name="description" content="sudoku">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <title>zadani</title>
+    <style>
+        body {background-image: url('/static/sudoku15.jpg'); background-size: 100% 100%;
+         margin: 0%;}
+
+        div {margin: auto; width: 750px; background-color: #afb6b5d2;
+            margin-top: 0%; min-height: 100vh;}
+
+        h1 {text-align: center; margin-top: 0%; padding-top: 3%; font-size: 250%; 
+            margin-bottom: 3%;}
+        
+        h2 {margin-left: 105px; font-size: 150%; margin-top: 0%; margin-bottom: 2%;}
+
+        table {width: 540px; margin-left: 105px; margin-top: 4%; position: relative;
+        border-collapse: collapse; border: 3px solid black}
+
+        table td {border: 1.5px solid black; height:52px; width: 60px; background-color: white; 
+                    text-align: center; font-size:34px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+        table tr.dolni td {border-bottom-width: 3px;}
+
+        #pole_02, #pole_05, #pole_12, #pole_15, #pole_22, #pole_25,
+        #pole_32, #pole_35, #pole_42, #pole_45, #pole_52, #pole_55,
+        #pole_62, #pole_65, #pole_72, #pole_75, #pole_82, #pole_85 {border-right-width: 3px;}
+
+        #pole_00, #pole_01, #pole_02, #pole_06, #pole_07, #pole_08,
+        #pole_10, #pole_11, #pole_12, #pole_16, #pole_17, #pole_18,
+        #pole_20, #pole_21, #pole_22, #pole_26, #pole_27, #pole_28,
+        #pole_33, #pole_34, #pole_35, #pole_43, #pole_44, #pole_45,
+        #pole_53, #pole_54, #pole_55, #pole_60, #pole_61, #pole_62,
+        #pole_66, #pole_67, #pole_68, #pole_70, #pole_71, #pole_72,
+        #pole_76, #pole_77, #pole_78, #pole_80, #pole_81, #pole_82,
+        #pole_86, #pole_87, #pole_88 {background-color: #e6f1f1;}
+
+        .spatne {background-color: #f03d3d}
+
+        input[type=submit] {width: 130px; font-size: 110%; margin-right: 2px; margin-top: 2%;
+                            cursor: pointer; margin-bottom: 2%;}
+
+        input[type=submit].prvni {margin-left: 105px;} 
+
+        input[type=submit].jedinacek {margin-left: 105px; width: 200px}
+
+    </style> 
+</head>
+
+<body>
+    <div>  
+    {% if zprava == 81 %}
+    <h1>Kontrola</h1>
+    <h2>Gratulujeme k úspěšnému řešení</h2>
+    {% elif zprava == None %}
+    <h1>Řešení</h1>
+    <h2>Příště na to už určitě přijdete sami</h2>
+    {% else %}
+    <h1>Kontrola</h1>
+    <h2>Červená políčka znamenají chybu</h2>
+    {% endif %}  
+            <table>
+            <tbody>
+                <tr>
+                    <td {% if kontrola[0][0] == "spravne" %} id=pole_00 {% else %} class="{{kontrola[0][0]}}" {% endif %}> {{sudoku[0][0]}}</td>
+                    <td {% if kontrola[0][1] == "spravne" %} id=pole_01 {% else %} class="{{kontrola[0][1]}}" {% endif %}> {{sudoku[0][1]}}</td>
+                    <td {% if kontrola[0][2] == "spravne" %} id=pole_02 {% else %} class="{{kontrola[0][2]}}" {% endif %}> {{sudoku[0][2]}}</td>
+                    <td {% if kontrola[0][3] == "spravne" %} id=pole_03 {% else %} class="{{kontrola[0][3]}}" {% endif %}> {{sudoku[0][3]}}</td>
+                    <td {% if kontrola[0][4] == "spravne" %} id=pole_04 {% else %} class="{{kontrola[0][4]}}" {% endif %}> {{sudoku[0][4]}}</td>
+                    <td {% if kontrola[0][5] == "spravne" %} id=pole_05 {% else %} class="{{kontrola[0][5]}}" {% endif %}> {{sudoku[0][5]}}</td>
+                    <td {% if kontrola[0][6] == "spravne" %} id=pole_06 {% else %} class="{{kontrola[0][6]}}" {% endif %}> {{sudoku[0][6]}}</td>
+                    <td {% if kontrola[0][7] == "spravne" %} id=pole_07 {% else %} class="{{kontrola[0][7]}}" {% endif %}> {{sudoku[0][7]}}</td>
+                    <td {% if kontrola[0][8] == "spravne" %} id=pole_08 {% else %} class="{{kontrola[0][8]}}" {% endif %}> {{sudoku[0][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[1][0] == "spravne" %} id=pole_10 {% else %} class="{{kontrola[1][0]}}" {% endif %}> {{sudoku[1][0]}}</td>
+                    <td {% if kontrola[1][1] == "spravne" %} id=pole_11 {% else %} class="{{kontrola[1][1]}}" {% endif %}> {{sudoku[1][1]}}</td>
+                    <td {% if kontrola[1][2] == "spravne" %} id=pole_12 {% else %} class="{{kontrola[1][2]}}" {% endif %}> {{sudoku[1][2]}}</td>
+                    <td {% if kontrola[1][3] == "spravne" %} id=pole_13 {% else %} class="{{kontrola[1][3]}}" {% endif %}> {{sudoku[1][3]}}</td>
+                    <td {% if kontrola[1][4] == "spravne" %} id=pole_14 {% else %} class="{{kontrola[1][4]}}" {% endif %}> {{sudoku[1][4]}}</td>
+                    <td {% if kontrola[1][5] == "spravne" %} id=pole_15 {% else %} class="{{kontrola[1][5]}}" {% endif %}> {{sudoku[1][5]}}</td>
+                    <td {% if kontrola[1][6] == "spravne" %} id=pole_16 {% else %} class="{{kontrola[1][6]}}" {% endif %}> {{sudoku[1][6]}}</td>
+                    <td {% if kontrola[1][7] == "spravne" %} id=pole_17 {% else %} class="{{kontrola[1][7]}}" {% endif %}> {{sudoku[1][7]}}</td>
+                    <td {% if kontrola[1][8] == "spravne" %} id=pole_18 {% else %} class="{{kontrola[1][8]}}" {% endif %}> {{sudoku[1][8]}}</td>
+                </tr>
+                <tr class="dolni">
+                    <td {% if kontrola[2][0] == "spravne" %} id=pole_20 {% else %} class="{{kontrola[2][0]}}" {% endif %}> {{sudoku[2][0]}}</td>
+                    <td {% if kontrola[2][1] == "spravne" %} id=pole_21 {% else %} class="{{kontrola[2][1]}}" {% endif %}> {{sudoku[2][1]}}</td>
+                    <td {% if kontrola[2][2] == "spravne" %} id=pole_22 {% else %} class="{{kontrola[2][2]}}" {% endif %}> {{sudoku[2][2]}}</td>
+                    <td {% if kontrola[2][3] == "spravne" %} id=pole_23 {% else %} class="{{kontrola[2][3]}}" {% endif %}> {{sudoku[2][3]}}</td>
+                    <td {% if kontrola[2][4] == "spravne" %} id=pole_24 {% else %} class="{{kontrola[2][4]}}" {% endif %}> {{sudoku[2][4]}}</td>
+                    <td {% if kontrola[2][5] == "spravne" %} id=pole_25 {% else %} class="{{kontrola[2][5]}}" {% endif %}> {{sudoku[2][5]}}</td>
+                    <td {% if kontrola[2][6] == "spravne" %} id=pole_26 {% else %} class="{{kontrola[2][6]}}" {% endif %}> {{sudoku[2][6]}}</td>
+                    <td {% if kontrola[2][7] == "spravne" %} id=pole_27 {% else %} class="{{kontrola[2][7]}}" {% endif %}> {{sudoku[2][7]}}</td>
+                    <td {% if kontrola[2][8] == "spravne" %} id=pole_28 {% else %} class="{{kontrola[2][8]}}" {% endif %}> {{sudoku[2][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[3][0] == "spravne" %} id=pole_30 {% else %} class="{{kontrola[3][0]}}" {% endif %}> {{sudoku[3][0]}}</td>
+                    <td {% if kontrola[3][1] == "spravne" %} id=pole_31 {% else %} class="{{kontrola[3][1]}}" {% endif %}> {{sudoku[3][1]}}</td>
+                    <td {% if kontrola[3][2] == "spravne" %} id=pole_32 {% else %} class="{{kontrola[3][2]}}" {% endif %}> {{sudoku[3][2]}}</td>
+                    <td {% if kontrola[3][3] == "spravne" %} id=pole_33 {% else %} class="{{kontrola[3][3]}}" {% endif %}> {{sudoku[3][3]}}</td>
+                    <td {% if kontrola[3][4] == "spravne" %} id=pole_34 {% else %} class="{{kontrola[3][4]}}" {% endif %}> {{sudoku[3][4]}}</td>
+                    <td {% if kontrola[3][5] == "spravne" %} id=pole_35 {% else %} class="{{kontrola[3][5]}}" {% endif %}> {{sudoku[3][5]}}</td>
+                    <td {% if kontrola[3][6] == "spravne" %} id=pole_36 {% else %} class="{{kontrola[3][6]}}" {% endif %}> {{sudoku[3][6]}}</td>
+                    <td {% if kontrola[3][7] == "spravne" %} id=pole_37 {% else %} class="{{kontrola[3][7]}}" {% endif %}> {{sudoku[3][7]}}</td>
+                    <td {% if kontrola[3][8] == "spravne" %} id=pole_38 {% else %} class="{{kontrola[3][8]}}" {% endif %}> {{sudoku[3][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[4][0] == "spravne" %} id=pole_40 {% else %} class="{{kontrola[4][0]}}" {% endif %}> {{sudoku[4][0]}}</td>
+                    <td {% if kontrola[4][1] == "spravne" %} id=pole_41 {% else %} class="{{kontrola[4][1]}}" {% endif %}> {{sudoku[4][1]}}</td>
+                    <td {% if kontrola[4][2] == "spravne" %} id=pole_42 {% else %} class="{{kontrola[4][2]}}" {% endif %}> {{sudoku[4][2]}}</td>
+                    <td {% if kontrola[4][3] == "spravne" %} id=pole_43 {% else %} class="{{kontrola[4][3]}}" {% endif %}> {{sudoku[4][3]}}</td>
+                    <td {% if kontrola[4][4] == "spravne" %} id=pole_44 {% else %} class="{{kontrola[4][4]}}" {% endif %}> {{sudoku[4][4]}}</td>
+                    <td {% if kontrola[4][5] == "spravne" %} id=pole_45 {% else %} class="{{kontrola[4][5]}}" {% endif %}> {{sudoku[4][5]}}</td>
+                    <td {% if kontrola[4][6] == "spravne" %} id=pole_46 {% else %} class="{{kontrola[4][6]}}" {% endif %}> {{sudoku[4][6]}}</td>
+                    <td {% if kontrola[4][7] == "spravne" %} id=pole_47 {% else %} class="{{kontrola[4][7]}}" {% endif %}> {{sudoku[4][7]}}</td>
+                    <td {% if kontrola[4][8] == "spravne" %} id=pole_48 {% else %} class="{{kontrola[4][8]}}" {% endif %}> {{sudoku[4][8]}}</td>
+                </tr>
+                <tr class="dolni">
+                    <td {% if kontrola[5][0] == "spravne" %} id=pole_50 {% else %} class="{{kontrola[5][0]}}" {% endif %}> {{sudoku[5][0]}}</td>
+                    <td {% if kontrola[5][1] == "spravne" %} id=pole_51 {% else %} class="{{kontrola[5][1]}}" {% endif %}> {{sudoku[5][1]}}</td>
+                    <td {% if kontrola[5][2] == "spravne" %} id=pole_52 {% else %} class="{{kontrola[5][2]}}" {% endif %}> {{sudoku[5][2]}}</td>
+                    <td {% if kontrola[5][3] == "spravne" %} id=pole_53 {% else %} class="{{kontrola[5][3]}}" {% endif %}> {{sudoku[5][3]}}</td>
+                    <td {% if kontrola[5][4] == "spravne" %} id=pole_54 {% else %} class="{{kontrola[5][4]}}" {% endif %}> {{sudoku[5][4]}}</td>
+                    <td {% if kontrola[5][5] == "spravne" %} id=pole_55 {% else %} class="{{kontrola[5][5]}}" {% endif %}> {{sudoku[5][5]}}</td>
+                    <td {% if kontrola[5][6] == "spravne" %} id=pole_56 {% else %} class="{{kontrola[5][6]}}" {% endif %}> {{sudoku[5][6]}}</td>
+                    <td {% if kontrola[5][7] == "spravne" %} id=pole_57 {% else %} class="{{kontrola[5][7]}}" {% endif %}> {{sudoku[5][7]}}</td>
+                    <td {% if kontrola[5][8] == "spravne" %} id=pole_58 {% else %} class="{{kontrola[5][8]}}" {% endif %}> {{sudoku[5][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[6][0] == "spravne" %} id=pole_60 {% else %} class="{{kontrola[6][0]}}" {% endif %}> {{sudoku[6][0]}}</td>
+                    <td {% if kontrola[6][1] == "spravne" %} id=pole_61 {% else %} class="{{kontrola[6][1]}}" {% endif %}> {{sudoku[6][1]}}</td>
+                    <td {% if kontrola[6][2] == "spravne" %} id=pole_62 {% else %} class="{{kontrola[6][2]}}" {% endif %}> {{sudoku[6][2]}}</td>
+                    <td {% if kontrola[6][3] == "spravne" %} id=pole_63 {% else %} class="{{kontrola[6][3]}}" {% endif %}> {{sudoku[6][3]}}</td>
+                    <td {% if kontrola[6][4] == "spravne" %} id=pole_64 {% else %} class="{{kontrola[6][4]}}" {% endif %}> {{sudoku[6][4]}}</td>
+                    <td {% if kontrola[6][5] == "spravne" %} id=pole_65 {% else %} class="{{kontrola[6][5]}}" {% endif %}> {{sudoku[6][5]}}</td>
+                    <td {% if kontrola[6][6] == "spravne" %} id=pole_66 {% else %} class="{{kontrola[6][6]}}" {% endif %}> {{sudoku[6][6]}}</td>
+                    <td {% if kontrola[6][7] == "spravne" %} id=pole_67 {% else %} class="{{kontrola[6][7]}}" {% endif %}> {{sudoku[6][7]}}</td>
+                    <td {% if kontrola[6][8] == "spravne" %} id=pole_68 {% else %} class="{{kontrola[6][8]}}" {% endif %}> {{sudoku[6][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[7][0] == "spravne" %} id=pole_70 {% else %} class="{{kontrola[7][0]}}" {% endif %}> {{sudoku[7][0]}}</td>
+                    <td {% if kontrola[7][1] == "spravne" %} id=pole_71 {% else %} class="{{kontrola[7][1]}}" {% endif %}> {{sudoku[7][1]}}</td>
+                    <td {% if kontrola[7][2] == "spravne" %} id=pole_72 {% else %} class="{{kontrola[7][2]}}" {% endif %}> {{sudoku[7][2]}}</td>
+                    <td {% if kontrola[7][3] == "spravne" %} id=pole_73 {% else %} class="{{kontrola[7][3]}}" {% endif %}> {{sudoku[7][3]}}</td>
+                    <td {% if kontrola[7][4] == "spravne" %} id=pole_74 {% else %} class="{{kontrola[7][4]}}" {% endif %}> {{sudoku[7][4]}}</td>
+                    <td {% if kontrola[7][5] == "spravne" %} id=pole_75 {% else %} class="{{kontrola[7][5]}}" {% endif %}> {{sudoku[7][5]}}</td>
+                    <td {% if kontrola[7][6] == "spravne" %} id=pole_76 {% else %} class="{{kontrola[7][6]}}" {% endif %}> {{sudoku[7][6]}}</td>
+                    <td {% if kontrola[7][7] == "spravne" %} id=pole_77 {% else %} class="{{kontrola[7][7]}}" {% endif %}> {{sudoku[7][7]}}</td>
+                    <td {% if kontrola[7][8] == "spravne" %} id=pole_78 {% else %} class="{{kontrola[7][8]}}" {% endif %}> {{sudoku[7][8]}}</td>
+                </tr>
+                <tr>
+                    <td {% if kontrola[8][0] == "spravne" %} id=pole_80 {% else %} class="{{kontrola[8][0]}}" {% endif %}> {{sudoku[8][0]}}</td>
+                    <td {% if kontrola[8][1] == "spravne" %} id=pole_81 {% else %} class="{{kontrola[8][1]}}" {% endif %}> {{sudoku[8][1]}}</td>
+                    <td {% if kontrola[8][2] == "spravne" %} id=pole_82 {% else %} class="{{kontrola[8][2]}}" {% endif %}> {{sudoku[8][2]}}</td>
+                    <td {% if kontrola[8][3] == "spravne" %} id=pole_83 {% else %} class="{{kontrola[8][3]}}" {% endif %}> {{sudoku[8][3]}}</td>
+                    <td {% if kontrola[8][4] == "spravne" %} id=pole_84 {% else %} class="{{kontrola[8][4]}}" {% endif %}> {{sudoku[8][4]}}</td>
+                    <td {% if kontrola[8][5] == "spravne" %} id=pole_85 {% else %} class="{{kontrola[8][5]}}" {% endif %}> {{sudoku[8][5]}}</td>
+                    <td {% if kontrola[8][6] == "spravne" %} id=pole_86 {% else %} class="{{kontrola[8][6]}}" {% endif %}> {{sudoku[8][6]}}</td>
+                    <td {% if kontrola[8][7] == "spravne" %} id=pole_87 {% else %} class="{{kontrola[8][7]}}" {% endif %}> {{sudoku[8][7]}}</td>
+                    <td {% if kontrola[8][8] == "spravne" %} id=pole_88 {% else %} class="{{kontrola[8][8]}}" {% endif %}> {{sudoku[8][8]}}</td>
+                </tr>
+            </tbody>
+            </table>
+            <form action ="" method="POST">
+            {% if zprava != 81 and zprava != None %}
+            <input class="jedinacek" type ="submit" name="action" value="Pokračovat v řešení">
+            {% else %}
+            <input class="prvni" type ="submit" name="action" value="Nové zadání">
+            <input type ="submit" name="action" value="Zpět na úvod">
+            {% endif %}
+            </form>
+            <p></p>
+    </div>
+</body>
+</html>
