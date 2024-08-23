@@ -1,24 +1,36 @@
-# Dokumentace k zápočtovému programu z programování
+# Sudoku Solver Application
 
-**Autor:** Tadeáš Tomiška
+**Author:** Tadeáš Tomiška
 
-Cílem mého zápočtového programu bylo vytvořit v jazyce Python aplikaci na řešení sudoku. Aplikace nejprve načte
-uživatelem zadané hodnoty, zkontroluje správnost vstupu, tj. jestli uživatel zadal pouze číslice v rozsahu 1-9 
-a jestli se na nějakém řádku, sloupci či čtverci 3x3 nevyskytují dvě stejné číslice. Je-li vstup korektní, 
-aplikace začne řešit sudoku. 
+## Overview
 
-K řešení aplikace využívá množiny. Pro každé políčko eviduje všechny možné číslice, které se v něm mohou
-vyskytnout, a pokud má nějaká množina velikost jedna, aplikace obsah množiny zapíše do políčka. Pokud se na 
-nějakém políčku vyskytne prázdná množina, úloha nemá řešení. V případě, že mají všechny množiny velikost větší
-než jedna, přichází na řadu řešení pomocí rekurze. Na výstupu uživatel obdrží vyřešené sudoku nebo souřadnice
-políčka, na kterém došlo k chybě.
+The goal of this project was to create a Sudoku solver application in Python. The application first reads user-entered values, checks the input for correctness—ensuring only digits from 1 to 9 are used and that no duplicate digits appear in any row, column, or 3x3 sub-grid. If the input is valid, the application proceeds to solve the Sudoku puzzle.
 
-Práce na projektu mě opravdu bavila, ale bylo mi líto, že mým programem bude pouze kód v Pythonu. Proto jsem 
-se rozhodl umístit svůj program na webové stránky. Program jsem také vylepšil, takže si nyní uživatel může 
-zahrát sudoku. Pokud si při hraní neví rady, může si nechat ukázat řešení. Pokud řeší sudoku a není si jistý, 
-jestli někde neudělal chybu, může si nechat zkontrolovat řešení. Pole se špatnými hodnotami zčervenají a při
-návratu z kontroly zpět k řešení se jejich obsah vymaže. Pole s vygenerovaným zadáním mají také atribut 
-`readonly`, aby je uživatel nemohl při řešení přepisovat.
+## Features
 
-Přikládám program v Pythonu, tři webové stránky a obrázek na pozadí. Program je nutné spustit na lokálním 
-serveru, ale úplně stejný kód je i na výše uvedené webové stránce.
+- **Input Validation:** Ensures only valid digits (1-9) are entered and that no duplicates exist in rows, columns, or 3x3 sub-grids.
+- **Solving Algorithm:** Utilizes sets to track possible digits for each cell. If a set has only one possible digit, it fills that cell. If any set is empty, the puzzle has no solution. The application uses recursion to solve the puzzle if all sets have more than one possible digit.
+- **Output:** Provides the solved Sudoku puzzle or the coordinates of the cell where an error occurred.
+
+## Web Application
+
+I enjoyed working on this project and decided to enhance it by deploying it as a web application. The web version allows users to:
+
+- **Play Sudoku:** Users can interact with the Sudoku grid and try to solve puzzles.
+- **Get Hints:** Users can request a solution if they get stuck while solving the puzzle.
+- **Check Solutions:** Users can validate their solutions. Incorrect values are highlighted in red, and the incorrect entries are cleared when switching back to the solution mode.
+- **Readonly Inputs:** Generated Sudoku puzzles are set to readonly to prevent users from modifying them while solving.
+
+## Files Included
+
+- **Python Program:** The core Sudoku solver implemented in Python.
+- **Web Pages:** Three web pages that host the Sudoku application.
+- **Background Image:** An image used as the background for the web application.
+
+## Running the Application
+
+To run the application locally, you need to start it on a local server. The same code is available on the provided web pages.
+
+---
+
+Feel free to explore the application and its features. If you encounter any issues or have suggestions, please let me know!
